@@ -56,6 +56,3 @@ async function getCategoriesPreview(){
     });
 
 };
-
-getTrandingMoviesPreview()
-getCategoriesPreview()
