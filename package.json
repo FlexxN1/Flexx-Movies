@@ -1,0 +1,22 @@
+{
+  "name": "flexx-movies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlexxN1/Flexx-Movies.git"
+  },
+  "keywords": [
+    "JavaScript"
+  ],
+  "author": "Flexx N1 <juandavidx40@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlexxN1/Flexx-Movies/issues"
+  },
+  "homepage": "https://github.com/FlexxN1/Flexx-Movies#readme"
+}
