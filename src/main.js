@@ -1,10 +1,19 @@
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3/',   
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+    }, 
+    params: {
+        'api_key': API_KEY
+    }
+});
+
 
 // TRANDING MOVIES
 async function getTrandingMoviesPreview(){
-    const response = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY);
-    const data = await response.json()
+    const { data } = await api('trending/movie/day');
+    const movies  = data.results;
 
-    const movies = data.results;
     movies.map(movie => {
         const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
 
@@ -27,8 +36,7 @@ async function getTrandingMoviesPreview(){
 
 // CATEGORIES MOVIES
 async function getCategoriesPreview(){
-    const response = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=' + API_KEY);
-    const data = await response.json()
+    const { data } = await api('genre/movie/list');
 
     const categories = data.genres;
     categories.map(category => {
