@@ -1,6 +1,11 @@
 searchFormBtn.addEventListener('click', () => {
-    location.hash = '#search=' + searchFormInput.value;
+    if(searchFormInput.value === ""){
+        searchFormBtn.setAttribute('type', 'button')
+    } else {
+        location.hash = `#search=${searchFormInput.value.split(' ').join('+')}`;
+    }   
 });
+
 trendingBtn.addEventListener('click', () => {
     location.hash = '#trends';
 });
