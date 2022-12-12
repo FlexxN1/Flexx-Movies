@@ -69,8 +69,9 @@ function categoriesPage(){
 
     const [_, categoryData] = location.hash.split('=');
     const [categoryId, categoryName] = categoryData.split('-');
+    const newName = categoryName.replace('%20', ' ')
 
-    headerCategoryTitle.innerText = categoryName
+    headerCategoryTitle.innerText = newName
 
     getMoviesByCategory(categoryId);
 
