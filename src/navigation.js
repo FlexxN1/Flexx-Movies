@@ -171,5 +171,5 @@ function trendsPage(){
 
     headerCategoryTitle.innerHTML = 'Tendencias'
 
-    getTrendingMovies()
+    getTrandingMovies()
 }
