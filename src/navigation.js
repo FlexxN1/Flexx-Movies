@@ -1,3 +1,8 @@
+/*searchFormBtn.addEventListener('click', () => {
+  location.hash = '#search=' + searchFormInput.value;
+});
+*/
+
 searchFormBtn.addEventListener('click', () => {
     if(searchFormInput.value === ""){
         searchFormBtn.setAttribute('type', 'button')
@@ -5,6 +10,7 @@ searchFormBtn.addEventListener('click', () => {
         location.hash = `#search=${searchFormInput.value.split(' ').join('+')}`;
     }   
 });
+
 
 trendingBtn.addEventListener('click', () => {
     location.hash = '#trends';
@@ -78,6 +84,7 @@ function categoriesPage(){
 
     const [_, categoryData] = location.hash.split('=');
     const [categoryId, categoryName] = categoryData.split('-');
+    //para reemplazar el error(%20) que sale en losespacios de los titulos
     const newName = categoryName.replace('%20', ' ')
 
     headerCategoryTitle.innerText = newName
@@ -104,6 +111,7 @@ function movieDetailsPage(){
     genericSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
 
+    // ['#movie', '123456]
     let [_, movieId] = location.hash.split('=');
 
     getMovieById(movieId)
@@ -128,14 +136,20 @@ function searchPage(){
     movieDetailSection.classList.add('inactive');
 
 
-    //para solucionar el error de los espacios, 2 soluciones
-    // 1
-    let [_, query] = location.hash.split('=')[1];
+    //para solucionar el error de "%20" los espacios, 2 soluciones
+    // 1 - usando el decodeURI
+
+    //let [_, query] = location.hash.split('=')[1];
+    //getMoviesBySearch(decodeURI(query))
+
+
+    //2 usando el metodo replace all
+    let [, query] = location.hash.split('=');
     //query = query.replaceAll('%20', ' ');
     //getMoviesBySearch(query)
 
-    //2 
-    getMoviesBySearch(decodeURI(query))
+    
+    getMoviesBySearch(query)
 }
 
 function trendsPage(){
@@ -157,5 +171,5 @@ function trendsPage(){
 
     headerCategoryTitle.innerHTML = 'Tendencias'
 
-    getMoviesBySearch()
+    getTrendingMovies()
 }

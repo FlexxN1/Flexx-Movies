@@ -56,6 +56,9 @@ function createCategories(categories, container){
     });
 }
 
+// Llamados a la API 
+
+
 // TRANDING MOVIES
 async function getTrandingMoviesPreview(){
     const { data } = await api('trending/movie/day');
