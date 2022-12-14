@@ -10,6 +10,8 @@ Recursos :
 
 - [API_KEY](https://www.themoviedb.org/settings/api)
 
+- [Figma Project UI/UX](https://www.figma.com/file/AYlJHq4RwChusnwFzMSOjd/Platzi_Movies?node-id=0%3A1)
+
 ## View project 🚀🙋🏻‍♂️
 ## [Deploy](https://flexxn1.github.io/Flexx-Movies-App/)
 
