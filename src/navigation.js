@@ -2,6 +2,8 @@
   location.hash = '#search=' + searchFormInput.value;
 });
 */
+
+let maxPage;
 let page = 1;
 let InfiniteScroll;
 
