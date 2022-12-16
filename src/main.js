@@ -9,13 +9,11 @@ const api = axios.create({
 });
 
 
-
-
 // Utils
 
 const lazyLoader =  new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        console.log({entry})
+        //console.log({entry})
 
         if(entry.isIntersecting){        
             const url = entry.target.getAttribute('data-img');
@@ -139,31 +137,46 @@ async function getTrandingMovies(){
     createMovies(movies, genericSection, { lazyLoad: true, clean: true });
 
 
-    const btnLoadMore = document.createElement('button');
-    btnLoadMore.innerText = 'Cargar Mas';
-    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-    genericSection.appendChild(btnLoadMore)
+    //const btnLoadMore = document.createElement('button');
+    //btnLoadMore.innerText = 'Cargar Mas';
+    //btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+    //genericSection.appendChild(btnLoadMore)
 };
 
-let page = 1;
-
 async function getPaginatedTrendingMovies(){
-    page++
-    const { data } = await api('trending/movie/day', {
-        params: {
-            page 
-        }
-    });
+    const {
+        scrollTop, 
+        scrollHeight, 
+        clientHeight
+    } = document.documentElement; 
 
-    const movies  = data.results;
+    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
 
-    createMovies(movies, genericSection, { lazyLoad: true, clean: false });
-
+    if(scrollIsBottom){
+        page++
+        const { data } = await api('trending/movie/day', {
+            params: {
+                page 
+            }
+        });
     
-    const btnLoadMore = document.createElement('button');
-    btnLoadMore.innerText = 'Cargar Mas';
-    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-    genericSection.appendChild(btnLoadMore)
+        const movies  = data.results;
+    
+        createMovies(
+            movies, 
+            genericSection, 
+            { 
+                lazyLoad: true, 
+                clean: false 
+            });
+    
+        
+        //const btnLoadMore = document.createElement('button');
+        //btnLoadMore.innerText = 'Cargar Mas';
+        //btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+        //genericSection.appendChild(btnLoadMore)
+    }
+    
 
 };
 
