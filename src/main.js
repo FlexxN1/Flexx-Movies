@@ -22,7 +22,15 @@ const lazyLoader =  new IntersectionObserver((entries) => {
     });
 });
 
-function createMovies(movies, container, {lazyLoad = false, clean = true} = {}){
+function createMovies(
+    movies, 
+    container, 
+    {
+        lazyLoad = false, 
+        clean = true
+    } = {}
+    ){
+
     if(clean){
         container.innerHTML = '';
     }
@@ -44,11 +52,17 @@ function createMovies(movies, container, {lazyLoad = false, clean = true} = {}){
             );
 
         movieImg.addEventListener('error', () => {
-            movieImg.setAttribute('src', `images/bg-default-${movie.genre_ids[0]}.png`)
-            const movieTitleText  = document.createTextNode(movieImg.getAttribute('alt'));
-            const movieTitle = document.createElement('span');
-            movieContainer.appendChild(movieTitle);
-            movieTitle.appendChild(movieTitleText);
+            movieImg.setAttribute(
+                'src', 
+               //`images/bg-default-${movie.genre_ids}.png`
+                'https://static.platzi.com/static/images/error/img404.png',
+
+            )
+            
+            //const movieTitleText  = document.createTextNode(movieImg.getAttribute('alt'));
+            //const movieTitle = document.createElement('span');
+            //movieContainer.appendChild(movieTitle);
+            //movieTitle.appendChild(movieTitleText);
         })
             
         if(lazyLoad){
@@ -113,8 +127,48 @@ async function getMoviesByCategory(id){
         }
     });
     const movies  = data.results;
+    maxPage = data.total_pages;
 
-    createMovies(movies, genericSection, true)
+    createMovies(movies, genericSection, { lazyLoad: true })
+
+};
+
+function getPaginatedMoviesByCategory(id){
+    return async function(){
+        const {
+                scrollTop, 
+                scrollHeight, 
+                clientHeight
+            } = document.documentElement;   
+
+            const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+            const pageIsNotMax = page < maxPage;
+
+            if(scrollIsBottom && pageIsNotMax){
+                page++
+                const { data } = await api('discover/movie', {
+                    params: {
+                        with_genres: id,
+                        page
+                    }
+                });
+                const movies  = data.results;
+            
+                createMovies(
+                    movies, 
+                    genericSection, 
+                    { 
+                        lazyLoad: true, 
+                        clean: false 
+                    });
+            
+                
+                //const btnLoadMore = document.createElement('button');
+                //btnLoadMore.innerText = 'Cargar Mas';
+                //btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+                //genericSection.appendChild(btnLoadMore)
+        }
+    }  
 
 };
 
@@ -125,8 +179,49 @@ async function getMoviesBySearch(query){
         }
     });
     const movies  = data.results;
+    maxPage = data.total_pages;
+    //console.log(maxPage)
 
     createMovies(movies, genericSection)
+
+};
+
+function getPaginatedMoviesBySearch(query){
+    return async function(){
+        const {
+                scrollTop, 
+                scrollHeight, 
+                clientHeight
+            } = document.documentElement;   
+
+            const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+            const pageIsNotMax = page < maxPage;
+
+            if(scrollIsBottom && pageIsNotMax){
+                page++
+                const { data } = await api('search/movie', {
+                    params: {
+                        query,
+                        page
+                    }
+                });
+                const movies  = data.results;
+            
+                createMovies(
+                    movies, 
+                    genericSection, 
+                    { 
+                        lazyLoad: true, 
+                        clean: false 
+                    });
+            
+                
+                //const btnLoadMore = document.createElement('button');
+                //btnLoadMore.innerText = 'Cargar Mas';
+                //btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+                //genericSection.appendChild(btnLoadMore)
+        }
+    }  
 
 };
 
