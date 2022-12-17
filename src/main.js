@@ -63,13 +63,23 @@ function createMovies(
             //const movieTitle = document.createElement('span');
             //movieContainer.appendChild(movieTitle);
             //movieTitle.appendChild(movieTitleText);
-        })
+        });
+
+        //boton de like
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+        movieBtn.addEventListener('click', (e) => {
+            e.stopPropagation()
+            movieBtn.classList.toggle('movie-btn--liked');
+        // DEBERIAMOS AGREGAR LA PELICULA A LS(local storage)
+        }, false);
             
         if(lazyLoad){
             lazyLoader.observe(movieImg);
         }
 
         movieContainer.appendChild(movieImg);
+        movieContainer.appendChild(movieBtn);
         container.appendChild(movieContainer);
     });
 }
