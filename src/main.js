@@ -24,7 +24,6 @@ function likedMoviesList(){
 
 function likeMovie(movie){
     const likedMovies = likedMoviesList();
-
     if(likedMovies[movie.id]){
         likedMovies[movie.id] = undefined
     }else{
@@ -32,6 +31,8 @@ function likeMovie(movie){
     }
 
     localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+      getTrandingMoviesPreview()
+    getLikedMovies()
 };
 
 
