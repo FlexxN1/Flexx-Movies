@@ -1,4 +1,4 @@
-# Flexx The Movies App 📽
+# Flexx The Movies App 📽 🍿
 
 Flexx Movies App, es una SPA para poder obtener informacion de las peliculas en tendecia, 
 ⚠ solo esta para vista Mobile.
