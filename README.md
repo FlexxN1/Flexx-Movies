@@ -1,8 +1,15 @@
 # Flexx The Movies App 📽 🍿
 
-Flexx Movies App, es una SPA para poder obtener informacion de las peliculas en tendecia, 
+Flexx Movies App, es una SPA para poder obtener informacion de las peliculas en tendecia,
 ⚠ solo esta para vista Mobile.
 
+Funcionalidades:
+
+- scrillInfinito
+- Paginación
+- LocalStorage
+- LazyLoding
+- LoadingSkeletons
 
 Recursos :
 
